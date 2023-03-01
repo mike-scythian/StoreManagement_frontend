@@ -4,10 +4,10 @@ import {useNavigate} from "react-router-dom";
 
 
 
-const baseOrderUrl = 'http://localhost:8181/orders?page=';
+const baseStoreUrl = 'http://localhost:8181/stores?page=';
 
 
-const Orders = () => {
+const Stores = () => {
 
   const [data, setData] = useState([]);
 
@@ -16,7 +16,7 @@ const Orders = () => {
   var page = 0
 
   useEffect(() =>{
-                  axios.get(baseOrderUrl+0)
+                  axios.get(baseStoreUrl+0)
                           .then(response => {
                       	    console.log(response.data)
                             setData(response.data)
@@ -25,7 +25,7 @@ const Orders = () => {
               }, [])
 
     const paging = (currentPage) =>{
-      axios(baseOrderUrl+currentPage)
+      axios(baseStoreUrl+currentPage)
         .then(response => {
           console.log(response.data)
           setData(response.data)
@@ -36,7 +36,7 @@ const Orders = () => {
     const incrementPage = () => {
       page++
       paging(page)
-    }
+    }   
 
     const decrementPage = () => {
       if(page !== 0)
@@ -44,35 +44,35 @@ const Orders = () => {
       paging(page)
   }     
 
-  const Rows = data.map( (orderRow, index) => {
+  const Rows = data.map( (row, index) => {
                           return (
                             <tr  className="table-info" key = {index}>
-                              <td>{orderRow.id}</td>
-                              <td>{orderRow.createTime}</td>
-                              <td>{orderRow.store}</td>
-                              <td>{orderRow.status}</td>
+                              <td>{row.id}</td>
+                              <td>{row.name}</td>
+                              <td>{row.openDate}</td>
+                              <td>{row.income}</td>
                               <td>
-                                <button type="button" className="btn btn-warning" onClick = {()=>navigate("/orders/"+orderRow.id)}>details</button>
+                                <button type="button" className="btn btn-warning" onClick = {()=>navigate("/stores/"+row.id)}>details</button>
                               </td>
                             </tr>
                           )})
 
   return (
     <div >
-       <table className="table table-hover">
-        <thead>
-           <tr>
-            <th scope="col">ID</th>
-            <th scope="col">CREATE TIME</th>
-            <th scope="col">STORE</th>
-            <th scope="col">STATUS</th>
-          </tr>
-        </thead>
-        <tbody>
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">NAME</th>
+              <th scope="col">OPEN DATE</th>
+              <th scope="col">INCOME</th>
+            </tr>
+          </thead>
+          <tbody>
             {Rows}
-        </tbody>
-      </table>
-      <div className="btn-group" role="group" aria-label="Basic example">
+          </tbody>
+        </table>
+        <div className="btn-group" role="group" aria-label="Basic example">
           <button type="button" className="btn btn-secondary" onClick={() => decrementPage()}>PREV</button>
           <button type="button" className="btn btn-secondary" onClick={() => incrementPage()}>NEXT</button>
         </div>
@@ -81,4 +81,4 @@ const Orders = () => {
    )
 }
 
-export default Orders;
+export default Stores;
