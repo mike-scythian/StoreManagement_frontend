@@ -42,9 +42,9 @@ const OrderDetails = () => {
             </tr>
   )})        
   return (
-    <div >
+    <div className="container w-50">
         <h2>Order № {orderId.id}</h2>
-        <table className="table table-hover">
+        <table className="table table-dark table-striped align-middle">
           <thead>
             <tr>
               <th scope="col">Product</th>
@@ -56,8 +56,10 @@ const OrderDetails = () => {
             {Body}
           </tbody>
         </table>
-        <button type="button" className="btn btn-success" onClick={() => navigate("/orders")}>ORDERS</button>
-        <button type="button" className="btn btn-success" onClick={() => pushClick()}>PUSH</button>
+        <div className="container m-3 d-flex justify-content-center">
+          <button type="button" className="btn btn-success m-3" onClick={() => navigate("/orders")}>ORDERS</button>
+          <button type="button" className="btn btn-success m-3" onClick={() => pushClick()}>PUSH</button>
+        </div>
       </div>
       
 

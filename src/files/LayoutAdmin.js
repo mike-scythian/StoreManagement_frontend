@@ -3,19 +3,27 @@ import { Outlet, Link } from "react-router-dom";
 const LayoutAdmin = () => {
   return (
     <>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/products">Products</Link>
+      <nav className="navbar navbar-light bg-light d-flex justify-content-center">
+        <ul className="nav nav-pills nav-fill">
+          <li className="nav-item">
+            <Link 
+              to="/products"
+              className="nav-link">Products</Link>
           </li>
-          <li>
-            <Link to="/stores">Stores</Link>
+          <li className="nav-item">
+            <Link 
+              to="/stores"
+              className="nav-link">Stores</Link>
           </li>
-          <li>
-            <Link to="/users">Users</Link>
+          <li className="nav-item">
+            <Link 
+            to="/users"
+            className="nav-link">Users</Link>
           </li>
-          <li>
-            <Link to="/orders">Orders</Link>
+          <li className="nav-item">
+            <Link 
+              to="/orders"
+              className="nav-link">Orders</Link>
           </li>
         </ul>
       </nav>

@@ -5,10 +5,10 @@ import ReactPaginate from "react-paginate";
 
 
 
-const baseUrl = 'http://localhost:8181/products?page=';
+const baseUrl = 'http://localhost:8181/users';
 
 
-const Products = () => {
+const Users = () => {
 
   const [data, setData] = useState([]);
 
@@ -17,15 +17,16 @@ const Products = () => {
   const [page,setPage] = useState(0)
 
   useEffect(() =>{
-                  axios.get(baseUrl.concat(page))
+                  axios(baseUrl + "?page=" + page)
                           .then(response => {
                       	    console.log(response.data)
+                              console.log(baseUrl.concat(page))
                             setData(response.data)
                             })
                           .catch(err => console.log(err))
               }, [])
 
-  const removeProduct = (id, index) => {
+  const removeUser = (id, index) => {
 
       axios.delete(baseUrl+"/"+id)
             .then(response => {
@@ -37,43 +38,47 @@ const Products = () => {
     }
 
     const handlePageClick = (page) =>{
-      console.log("click")
-      axios(baseUrl+page.selected)
-          .then(response => {
-            console.log(response.data)
-            setData(response.data)
-            })
-          .catch(err => console.log(err))
-    }      
+        console.log("click")
+        axios(baseUrl + "?page=" +page.selected)
+            .then(response => {
+              console.log(response.data)
+              setData(response.data)
+              })
+            .catch(err => console.log(err))
+      }           
 
-    const Rows = data.map( (productRow, index) => {
+    const Rows = data.map( (row, index) => {
                           return (
                             <tr key = {index}>
-                              <td>{productRow.id}</td>
-                              <td>{productRow.name}</td>
-                              <td>{productRow.type}</td>
-                              <td>{productRow.price}</td>
-                              <td>{productRow.units}</td>
+                              <td>{row.id}</td>
+                              <td>{row.firstName}</td>
+                              <td>{row.lastName}</td>
+                              <td>{row.email}</td>
+                              <td>{row.roles}</td>
+                              <td>{row.storeId}</td>
                               <td>
-                                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                                  <button type="button" className="btn btn-warning" onClick = {() => navigate("/products/"+productRow.id)}>edit</button>
-                                  <button type="button" className="btn btn-danger" onClick = {e => removeProduct(productRow.id, e)}>delete</button>
-                                </div>
+                              <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="button" className="btn btn-warning" onClick = {() => navigate("/users/"+row.id)}>edit</button>
+                                <button type="button" className="btn btn-danger" onClick = {e => removeUser(row.id, e)}>delete</button>
+                              </div>
                               </td>
                             </tr>
                           )})
 
+        
+
   return (
-    <div className="container w-50">
-      <h2>Products</h2>
+    <div className="container w-75">
+      <h2>Users</h2>
         <table className="table table-dark table-striped align-middle">
           <thead>
             <tr>
               <th scope="col">ID</th>
-              <th scope="col">Name</th>
-              <th scope="col">Type</th>
-              <th scope="col">Price</th>
-              <th scope="col">Units</th>
+              <th scope="col">FIRST NAME</th>
+              <th scope="col">LAST NAME</th>
+              <th scope="col">EMAIL</th>
+              <th scope="col">ROLE</th>
+              <th scope="col">STORE</th>
               <th></th>
             </tr>
           </thead>
@@ -83,7 +88,7 @@ const Products = () => {
         </table>
         <div className="container m-3 d-flex justify-content-center">
           <ReactPaginate
-            pageCount={5}
+            pageCount={3}
             marginPagesDisplayed={5}
             onPageChange={handlePageClick}
             containerClassName={"pagination"}
@@ -92,11 +97,11 @@ const Products = () => {
             previousClassName={"page-item"}/>
         </div>
         <div className="container m-3 d-flex justify-content-center">
-          <button type="button" className="btn btn-success m-3" onClick={() => navigate("/products/new-product")}>NEW PRODUCT</button>
+          <button type="button" className="btn btn-success" onClick={() => navigate("/users/new-user")}>NEW USER</button>
         </div>
-      </div>
+    </div>
 
    )
 }
 
-export default Products;
+export default Users;
