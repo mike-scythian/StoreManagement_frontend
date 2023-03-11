@@ -64,9 +64,6 @@ const Users = () => {
                               </td>
                             </tr>
                           )})
-
-        
-
   return (
     <div className="container w-75">
       <h2>Users</h2>

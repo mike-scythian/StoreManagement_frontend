@@ -6,7 +6,7 @@ import {useNavigate, useParams} from "react-router-dom";
 
 const storeUrl = 'http://localhost:8181/stores/'
 
-const usersUrl =  'http://localhost:8181/users?page=-1'
+const usersUrl =  'http://localhost:8181/users'
 
 
 const StoreDetails = () => {

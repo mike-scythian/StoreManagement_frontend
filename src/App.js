@@ -1,19 +1,25 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Stores from "./files/store-pages/Stores"
-import StoreDetails from "./files/store-pages/StoraDetails";
-import Orders from "./files/order-pages/Orders"
-import Products from "./files/prod-pages/Products";
-import NewProduct from "./files/prod-pages/NewProduct";
-import LayoutAdmin from "./files/LayoutAdmin"
-import EditProduct from "./files/prod-pages/EditProduct";
-import OrderDetails from "./files/order-pages/OrderDetails";
-import CreateStore from "./files/store-pages/CreateStore";
-import UpdateStore from "./files/store-pages/UpdateStore";
-import Users from "./files/user-pages/Users";
-import NewUser from "./files/user-pages/NewUser";
-import UpdateUser from "./files/user-pages/UpdateUser";
+import Stores from "./files/ADMIN/store-pages/Stores"
+import StoreDetails from "./files/ADMIN/store-pages/StoraDetails";
+import Orders from "./files/ADMIN/order-pages/Orders"
+import Products from "./files/ADMIN/prod-pages/Products";
+import NewProduct from "./files/ADMIN/prod-pages/NewProduct";
+import LayoutAdmin from "./files/ADMIN/LayoutAdmin"
+import EditProduct from "./files/ADMIN/prod-pages/EditProduct";
+import OrderDetails from "./files/ADMIN/order-pages/OrderDetails";
+import CreateStore from "./files/ADMIN/store-pages/CreateStore";
+import UpdateStore from "./files/ADMIN/store-pages/UpdateStore";
+import Users from "./files/ADMIN/user-pages/Users";
+import NewUser from "./files/ADMIN/user-pages/NewUser";
+import UpdateUser from "./files/ADMIN/user-pages/UpdateUser";
+import LayoutStore from "./files/STORE/LayoutStore";
+import StoreStock from "./files/STORE/StoreStock";
+import PasswordUpdate from "./files/STORE/PasswordUpdate";
+import StoreInfo from "./files/STORE/StoreInfo";
+import StoreOrder from "./files/STORE/StoreOrder";
+import StoreOrderDetails from "./files/STORE/StoreOrderDetails";
 
 
 const App = () => {
@@ -35,6 +41,14 @@ const App = () => {
             <Route exact path= "/users/:id" element = {<UpdateUser/>} /> {}
           <Route path="orders" element={<Orders />} />
             <Route exact path = "/orders/:id" element = {<OrderDetails/>}/>{}
+        </Route>
+        <Route path = "/store/:id" element={<LayoutStore/>}>
+          <Route index element={<StoreStock/>}/>
+          <Route path="/store/:id/stocks" element={<StoreStock/>}/> {}
+          <Route path="/store/:id/password" element={<PasswordUpdate/>}/>{}
+          <Route path="/store/:id/orders" element={<StoreOrder/>}/> {}
+          <Route path="/store/:id/orders/details" element={<StoreOrderDetails/>}/>{}
+          <Route path="/store/:id/info" element = {<StoreInfo/>}/>{}
         </Route>
       </Routes>
     </BrowserRouter>

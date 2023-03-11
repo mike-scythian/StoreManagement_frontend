@@ -6,8 +6,6 @@ import ReactPaginate from "react-paginate";
 
 const baseOrderUrl = 'http://localhost:8181/orders?page=';
 
-const sortOrderUrl = 'http://localhost:8181/orders/sort?page=';
-
 
 const Orders = () => {
 
@@ -37,7 +35,7 @@ const Orders = () => {
     }  
 
 const handleSortByDate = () => {
-  axios.get(sortOrderUrl+page+"&sortParam=createTime")
+  axios.get(baseOrderUrl+page+"&sortParam=createTime")
                 .then(response => {
                   console.log(response.data)
                   setData(response.data)
@@ -46,7 +44,7 @@ const handleSortByDate = () => {
               }
 
 const handleSortByStatus = () => {
-  axios.get(sortOrderUrl+page+"&sortParam=status")
+  axios.get(baseOrderUrl+page+"&sortParam=status")
        .then(response => {
               console.log(response.data)
               setData(response.data)
